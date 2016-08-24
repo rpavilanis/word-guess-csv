@@ -1,5 +1,8 @@
+require 'csv'
+require 'awesome_print'
+
 class WordGuess
-  def initialize(debug = false)
+  def initialize(debug = true)
     # are we in debug mode?
     @debug = debug
 
@@ -12,6 +15,32 @@ class WordGuess
           magnanimous unencumbered bioluminescent circumlocution
         )
     }
+
+    CSV.open("words.csv", 'r').each do |line|
+        if line[0] == "e"
+          line.each do |word|
+            if word != "e"
+              @words["e"] << word
+            end
+          end
+        end
+        if line[0] == "m"
+          line.each do |word|
+            if word != "m"
+              @words["m"] << word
+            end
+          end
+        end
+        if line[0] == "h"
+          line.each do |word|
+            if word != "h"
+              @words["h"] << word
+            end
+          end
+        end
+      end
+puts @words["e"]
+
 
     # players attempts allowed by difficulty
     @tries = {
